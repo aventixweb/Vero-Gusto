@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vero Gusto – Eis · Kaffee · Bistro | Bad Lippspringe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6EF;
+    --warm-white: #FDF9F3;
+    --gelato-rose: #E8B4A0;
+    --chocolate: #3D2214;
+    --caramel: #C4873A;
+    --blush: #F2D5C8;
+    --sage: #B5C9A8;
+    --text: #2A1A10;
+    --text-light: #6B5240;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.4rem;
+    background: rgba(37, 18, 6, 0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(61,34,20,0.1);
+    box-shadow: 0 2px 20px rgba(61,34,20,0.08);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text-light); text-decoration: none; }
+  .nav-logo span { color: var(--caramel); font-style: italic; }
+  .nav-links { display: none; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-light); text-decoration: none; font-weight: 500;
+    position: relative; padding-bottom: 3px;
+    transition: color 0.25s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: var(--caramel);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--caramel); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  @media (min-width: 600px) { .nav-links { display: flex; } }
+
+
+  /* HERO */
+  .hero { min-height: 100svh; display: flex; flex-direction: column; padding-top: 3.5rem; }
+  .hero-img-wrap { position: relative; flex: 1; min-height: 55vw; overflow: hidden; background: var(--blush); }
+  .hero-img-main { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-badge { position: absolute; bottom: 1.2rem; left: 1.2rem; background: var(--chocolate); color: var(--cream); padding: 1rem 1.4rem; border-radius: 2px; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.6; }
+  .hero-badge strong { display: block; font-size: 2rem; font-weight: 300; color: var(--caramel); line-height: 1; }
+  .hero-text { background: var(--warm-white); padding: 2.5rem 1.4rem 3rem; }
+  .hero-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--caramel); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+  .hero-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--caramel); }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 12vw, 5rem); font-weight: 300; line-height: 1.0; color: var(--chocolate); margin-bottom: 1.2rem; }
+  .hero-title em { font-style: italic; color: var(--caramel); display: block; }
+  .hero-sub { font-size: 0.95rem; line-height: 1.8; color: var(--text-light); font-weight: 300; margin-bottom: 2rem; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--chocolate); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1.5px solid var(--caramel); padding-bottom: 0.3rem; }
+
+  /* STRIP */
+  .strip { background: var(--chocolate); color: var(--cream); padding: 0.8rem 0; overflow: hidden; white-space: nowrap; }
+  .strip-inner { display: inline-flex; gap: 3rem; animation: marquee 22s linear infinite; }
+  .strip-inner span { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; }
+  .strip-inner span.sep { color: var(--caramel); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ABOUT */
+  .about { background: var(--cream); }
+  .about-img-wrap { position: relative; height: 60vw; min-height: 220px; overflow: hidden; }
+  .about-img-bg { width: 80%; height: 60%; object-fit: cover; display: block; border: 3px solid #2A1A10; }
+  .about-img-inset { position: absolute; bottom: 1rem; right: 1rem; width: 42%; aspect-ratio: 4/3; object-fit: cover; border: 4px solid var(--cream); box-shadow: -4px 4px 20px rgba(61,34,20,0.18); }
+  .about-text { padding: 2.5rem 1.4rem 3rem; }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--caramel); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; }
+  .section-label::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--caramel); }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 8vw, 3.2rem); font-weight: 300; line-height: 1.1; color: var(--chocolate); margin-bottom: 1.2rem; }
+  h2 em { font-style: italic; color: var(--caramel); }
+  .about-text p { font-size: 0.95rem; line-height: 1.85; color: var(--text-light); font-weight: 300; margin-bottom: 1rem; }
+  .about-stats { display: flex; gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(61,34,20,0.1); }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--caramel); line-height: 1; }
+  .stat-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-top: 0.2rem; }
+
+  /* SPEISEKARTE */
+  .speisekarte { background: var(--warm-white); padding: 3rem 0 4rem; margin-top: -100px; }
+  .speisekarte-header { padding: 0 1.4rem 2rem; }
+  .speisekarte-header h2 { margin-bottom: 0.5rem; }
+  .speisekarte-header p { font-size: 0.88rem; color: var(--text-light); font-weight: 300; line-height: 1.7; }
+
+  .menu-tabs { display: flex; gap: 0.7rem; padding: 1.6rem 1.4rem 0; position: sticky; top: 3.6rem; z-index: 10; background: var(--warm-white); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; border-bottom: 1.5px solid rgba(61,34,20,0.08); }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 0.65rem 1.3rem 0.75rem;
+    background: rgba(61,34,20,0.05);
+    border: 1.5px solid rgba(61,34,20,0.1);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: -1.5px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { background: rgba(196,135,58,0.08); color: var(--chocolate); border-color: rgba(196,135,58,0.3); }
+  .tab-btn.active {
+    background: var(--caramel);
+    border-color: var(--caramel);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .tab-panel { display: none; padding: 0 1.4rem; }
+  .tab-panel.active { display: block; }
+
+  .menu-section-intro { padding: 1.8rem 0 1.2rem; font-size: 0.88rem; color: var(--text-light); font-weight: 300; line-height: 1.7; border-bottom: 1px solid rgba(61,34,20,0.07); margin-bottom: 0.5rem; }
+
+  .menu-category-title { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; color: var(--chocolate); padding: 1.8rem 0 0.7rem; border-bottom: 1px solid rgba(61,34,20,0.1); margin-bottom: 0.2rem; font-style: italic; }
+  .menu-note { font-size: 0.78rem; color: var(--text-light); font-weight: 300; padding: 0.6rem 0 0.2rem; font-style: italic; }
+
+  .menu-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid rgba(61,34,20,0.06); cursor: pointer; gap: 0.8rem; -webkit-tap-highlight-color: rgba(196,135,58,0.08); }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item:active { background: rgba(196,135,58,0.05); margin: 0 -0.5rem; padding: 1rem 0.5rem; border-radius: 4px; }
+  .item-left { flex: 1; min-width: 0; }
+  .item-name { font-size: 0.98rem; font-weight: 400; color: var(--chocolate); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.4rem; }
+  .veg-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #8BAF7C; flex-shrink: 0; }
+  .item-desc { font-size: 0.8rem; color: var(--text-light); font-weight: 300; line-height: 1.5; }
+  .item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; flex-shrink: 0; }
+  .item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: var(--caramel); white-space: nowrap; }
+  .item-info-btn { font-size: 0.65rem; color: var(--caramel); letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(196,135,58,0.4); padding: 0.18rem 0.5rem; border-radius: 20px; background: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; white-space: nowrap; }
+
+  /* INGREDIENT MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(42,26,16,0.55); z-index: 500; align-items: flex-end; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--cream); width: 100%; max-width: 520px; border-radius: 16px 16px 0 0; padding: 0 1.4rem 2.5rem; max-height: 85svh; overflow-y: auto; animation: slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+  @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-handle { width: 36px; height: 4px; border-radius: 2px; background: rgba(61,34,20,0.15); margin: 1rem auto 1.4rem; }
+  .modal-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--chocolate); margin-bottom: 0.3rem; }
+  .modal-price { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--caramel); margin-bottom: 1rem; }
+  .modal-desc { font-size: 0.92rem; color: var(--text-light); line-height: 1.75; font-weight: 300; margin-bottom: 1.4rem; }
+  .modal-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--caramel); font-weight: 500; margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.6rem; }
+  .modal-label::before { content: ''; display: block; width: 1rem; height: 1px; background: var(--caramel); }
+  .allergen-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
+  .chip { font-size: 0.78rem; padding: 0.25rem 0.7rem; border: 1px solid rgba(61,34,20,0.15); border-radius: 20px; color: var(--text-light); }
+  .ingredient-list { list-style: none; }
+  .ingredient-list li { padding: 0.55rem 0; border-bottom: 1px solid rgba(61,34,20,0.06); font-size: 0.9rem; color: var(--text-light); font-weight: 300; }
+  .ingredient-list li:last-child { border-bottom: none; }
+  .modal-close-btn { width: 100%; margin-top: 1.8rem; padding: 0.95rem; background: var(--chocolate); color: var(--cream); border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+
+  /* GALLERY */
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+  .gallery-item { overflow: hidden; position: relative; background: var(--blush); aspect-ratio: 1/1; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-item.wide { grid-column: 1 / 3; aspect-ratio: 16/7; }
+  .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; background: linear-gradient(to top, rgba(61,34,20,0.65) 0%, transparent 100%); color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; opacity: 0; transform: translateY(5px); transition: opacity 0.3s, transform 0.3s; }
+  .gallery-item:active .gallery-caption { opacity: 1; transform: none; }
+
+  /* REVIEWS */
+  .reviews { background: var(--chocolate); padding: 3rem 1.4rem 4rem; position: relative; overflow: hidden; }
+  .reviews::before { content: '"'; position: absolute; top: -3rem; left: 1rem; font-family: 'Cormorant Garamond', serif; font-size: 20rem; font-weight: 300; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; }
+  .reviews-header { margin-bottom: 2.5rem; }
+  .reviews-header h2 { color: var(--cream); }
+  .reviews-header h2 em { color: var(--gelato-rose); }
+  .reviews-header .section-label { color: var(--gelato-rose); }
+  .reviews-header .section-label::before { background: var(--gelato-rose); }
+  .stars { color: var(--caramel); font-size: 1rem; letter-spacing: 2px; display: block; margin: 0.5rem 0; }
+  .review-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 1.6rem; margin-bottom: 1rem; }
+  .review-stars { color: var(--caramel); font-size: 0.85rem; margin-bottom: 0.8rem; }
+  .review-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; line-height: 1.7; color: rgba(250,246,239,0.85); margin-bottom: 1rem; }
+  .review-author { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,246,239,0.4); }
+  .rating-badge { display: flex; gap: 1.5rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); justify-content: center; }
+  .rating-big { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--caramel); line-height: 1; text-align: center; }
+  .rating-label { color: rgba(250,246,239,0.5); font-size: 0.75rem; text-align: center; margin-top: 0.2rem; }
+  .rating-divider { width: 1px; background: rgba(255,255,255,0.08); }
+
+  /* LOCATION */
+  .location { background: var(--blush); }
+  .location-text { padding: 3rem 1.4rem 2.5rem; }
+  .location-text > p { font-size: 0.92rem; color: var(--text-light); line-height: 1.8; font-weight: 300; margin-bottom: 1.8rem; }
+  .info-rows { display: flex; flex-direction: column; }
+  .info-row { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(61,34,20,0.08); }
+  .info-row:last-child { border-bottom: none; }
+  .info-icon-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--caramel); color: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; font-weight: 600; }
+  .info-content { flex: 1; }
+  .info-title { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--caramel); font-weight: 500; margin-bottom: 0.15rem; }
+  .info-value { font-size: 0.88rem; color: var(--text); line-height: 1.55; }
+  .location-map { height: 55vw; min-height: 220px; }
+  .location-map iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  /* CTA */
+  .cta-section { padding: 4rem 1.4rem; background: var(--caramel); text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: 'VERO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Cormorant Garamond', serif; font-size: 30vw; font-weight: 600; color: rgba(61,34,20,0.07); white-space: nowrap; pointer-events: none; line-height: 1; }
+  .cta-section h2 { color: var(--cream); margin-bottom: 0.8rem; position: relative; }
+  .cta-section h2 em { color: var(--chocolate); }
+  .cta-section p { color: rgba(250,246,239,0.85); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2.5rem; position: relative; font-weight: 300; }
+  .btn-primary { display: inline-block; background: var(--chocolate); color: var(--cream); text-decoration: none; padding: 1rem 2.5rem; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
+
+  /* FOOTER */
+  footer { background: var(--text); color: rgba(250,246,239,0.55); padding: 3rem 1.4rem 2rem; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--cream); margin-bottom: 0.8rem; }
+  .footer-brand span { color: var(--caramel); font-style: italic; }
+  .footer-tagline { font-size: 0.85rem; line-height: 1.7; margin-bottom: 2rem; }
+  .footer-grid { display: flex; flex-direction: column; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); margin-bottom: 2rem; }
+  .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--caramel); margin-bottom: 0.8rem; font-weight: 500; }
+  .footer-col p { font-size: 0.85rem; line-height: 1.9; }
+  .footer-legal { padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-legal p { font-size: 0.78rem; }
+  .footer-legal-links { display: flex; gap: 1.5rem; }
+  .footer-legal-links button { background: none; border: none; cursor: pointer; font-size: 0.78rem; color: rgba(250,246,239,0.45); font-family: 'DM Sans', sans-serif; padding: 0; text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+  .footer-legal-links button:hover { color: var(--caramel); }
+
+  /* LEGAL MODAL */
+  .legal-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(42,26,16,0.6); z-index: 600; align-items: flex-end; justify-content: center; }
+  .legal-modal-overlay.open { display: flex; }
+  .legal-modal { background: var(--cream); width: 100%; max-width: 600px; border-radius: 16px 16px 0 0; max-height: 90svh; overflow-y: auto; animation: slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+  .legal-modal-head { position: sticky; top: 0; background: var(--cream); padding: 1rem 1.4rem; border-bottom: 1px solid rgba(61,34,20,0.08); display: flex; justify-content: space-between; align-items: center; z-index: 1; }
+  .legal-modal-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--chocolate); }
+  .legal-close { background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--text-light); line-height: 1; }
+  .legal-modal-body { padding: 1.4rem 1.4rem 3rem; }
+  .legal-modal-body h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: var(--chocolate); margin: 1.5rem 0 0.5rem; }
+  .legal-modal-body h4:first-child { margin-top: 0; }
+  .legal-modal-body p { font-size: 0.88rem; line-height: 1.8; color: var(--text-light); font-weight: 300; margin-bottom: 0.5rem; }
+
+  /* DESKTOP */
+  @media (min-width: 768px) {
+    nav { padding: 1.2rem 3rem; }
+    .hero { flex-direction: row; }
+    .hero-text { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem 5rem 5rem; }
+    .hero-img-wrap { flex: 1; min-height: unset; }
+    .about { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+    .about-img-wrap { height: 100%; min-height: 400px; }
+    .about-text { padding: 5rem; }
+    .speisekarte { padding: 5rem 0 6rem; }
+    .speisekarte-header { padding: 0 5rem 2.5rem; }
+    .menu-tabs { padding: 1.6rem 5rem 0; top: 4rem; }
+    .tab-panel { padding: 0 5rem; max-width: 860px; }
+    .gallery { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 320px 320px; }
+    .gallery-item { aspect-ratio: auto; }
+    .gallery-item.wide { grid-column: auto; aspect-ratio: auto; }
+    .gallery-item.tall { grid-row: 1 / 3; }
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: none; }
+    .reviews { padding: 6rem 5rem; }
+    .reviews-grid-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 3rem; }
+    .reviews-grid-wrap .review-card { margin-bottom: 0; }
+    .location { display: grid; grid-template-columns: 1fr 1fr; }
+    .location-text { padding: 5rem; }
+    .location-map { height: auto; min-height: 450px; }
+    .cta-section { padding: 7rem 5rem; }
+    footer { padding: 4rem 5rem; }
+    .footer-grid { flex-direction: row; gap: 4rem; }
+    .footer-legal { flex-direction: row; justify-content: space-between; align-items: center; }
+    .modal { border-radius: 12px; margin: 2rem; max-height: 80svh; }
+    .modal-overlay { align-items: center; }
+    .legal-modal { border-radius: 12px; margin: 2rem; max-height: 85svh; }
+    .legal-modal-overlay { align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Vero <span>Gusto</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#speisekarte">Speisekarte</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#bewertungen">Bewertungen</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-img-wrap">
+    <img src="aussenjpg.jpg" alt="Eisbecher Vero Gusto" class="hero-img-main">
+    <div class="hero-badge"><strong>4,2</strong>Google Bewertung<br><small style="opacity:0.6">317 Rezensionen</small></div>
+  </div>
+  <div class="hero-text">
+    <p class="hero-tag">Bad Lippspringe · Original Italiano</p>
+    <h1 class="hero-title">Echtes<br><em>Italienisches</em><br>Eis</h1>
+    <p class="hero-sub">Hausgemacht. Täglich frisch. Mit Leidenschaft zubereitet — im Herzen von Bad Lippspringe.</p>
+    <a href="#speisekarte" class="hero-cta">Zur Speisekarte &rarr;</a>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span>Hausgemachtes Eis</span><span class="sep">&#x2736;</span><span>Original Italiano</span><span class="sep">&#x2736;</span><span>Täglich frisch</span><span class="sep">&#x2736;</span><span>Kaffeespezialitäten</span><span class="sep">&#x2736;</span><span>Eisbecher</span><span class="sep">&#x2736;</span><span>Sonnenterrasse</span><span class="sep">&#x2736;</span><span>Hausgemachtes Eis</span><span class="sep">&#x2736;</span><span>Original Italiano</span><span class="sep">&#x2736;</span><span>Täglich frisch</span><span class="sep">&#x2736;</span><span>Kaffeespezialitäten</span><span class="sep">&#x2736;</span><span>Eisbecher</span><span class="sep">&#x2736;</span><span>Sonnenterrasse</span><span class="sep">&#x2736;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap">
+    <img src="eisherz.jpg" alt="Eisbecher" class="about-img-bg">
+  </div>
+  <div class="about-text">
+    <p class="section-label">Unsere Geschichte</p>
+    <h2>Tradizione<br><em>Italiana</em></h2>
+    <p>Im Herzen der Fußgängerzone von Bad Lippspringe, direkt am Rathausplatz, lädt Vero Gusto täglich zum Verweilen ein. Kurbesucher, Einheimische und Spaziergänger — alle verbunden durch die Liebe zu echtem Eis.</p>
+    <p>Jede Kugel erzählt von sorgfältig ausgewählten Zutaten, überlieferten Rezepturen und dem Stolz auf das Handwerk.</p>
+    <div class="about-stats">
+      <div><div class="stat-num">317</div><div class="stat-label">Bewertungen</div></div>
+      <div><div class="stat-num">4,2</div><div class="stat-label">Google Sterne</div></div>
+      <div><div class="stat-num">tägl.</div><div class="stat-label">Frisch</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEISEKARTE -->
+<section class="speisekarte" id="speisekarte">
+  <div class="speisekarte-header">
+    <p class="section-label">Was wir bieten</p>
+    <h2>Unsere <em>Speisekarte</em></h2>
+    <p>Auf einen Artikel tippen, um Zutaten &amp; Allergene einzusehen.</p>
+  </div>
+
+  <div class="menu-tabs" role="tablist">
+    <button class="tab-btn active" role="tab" onclick="switchTab('eis',this)">Eis &amp; Becher</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('kaffee',this)">Kaffee &amp; Heißes</button>
+    <button class="tab-btn" role="tab" onclick="switchTab('bistro',this)">Bistro &amp; Süßes</button>
+  </div>
+
+  <!-- TAB 1 -->
+  <div class="tab-panel active" id="tab-eis">
+    <p class="menu-section-intro">Original italienisches Eis, täglich frisch hergestellt. Alle Sorten auch als Tüte zum Mitnehmen.</p>
+    <div class="menu-category-title">Klassische Sorten</div>
+    <p class="menu-note">Preis pro Kugel</p>
+    <div class="menu-item" onclick="openModal('vanille')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Vanille</div><div class="item-desc">Cremiges Vanilleeis nach original italienischer Rezeptur</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('schokolade')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Schokolade</div><div class="item-desc">Intensives Eis aus dunkler Kuvertüre</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('stracciatella')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Stracciatella</div><div class="item-desc">Sahniges Milcheis mit feinen Schokoladensplittern</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('pistazie')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Pistazie</div><div class="item-desc">Fein gemahlene Pistazien aus sizilianischem Anbau</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('haselnuss')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Haselnuss</div><div class="item-desc">Nussig-cremig mit gerösteten Haselnüssen</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('tiramisu')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Tiramisu</div><div class="item-desc">Mascarpone, Espresso und Amaretto als Eis</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-category-title">Fruchtsorten</div>
+    <p class="menu-note">Sorbetbasiert · laktosefrei</p>
+    <div class="menu-item" onclick="openModal('erdbeere')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Erdbeere</div><div class="item-desc">Sorbet aus frischen Erdbeeren, ohne Milch</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('zitrone')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Zitrone</div><div class="item-desc">Erfrischendes Zitronensorbet, angenehm säuerlich</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('himbeere')"><div class="item-left"><div class="item-name"><span class="veg-dot"></span>Himbeere</div><div class="item-desc">Intensives Himbeersorbet aus reifen Früchten</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-category-title">Eisbecher</div>
+    <div class="menu-item" onclick="openModal('erdbeerbecher')"><div class="item-left"><div class="item-name">Erdbeerbecher</div><div class="item-desc">3 Kugeln Eis nach Wahl, frische Erdbeeren, Sahne, Waffel</div></div><div class="item-right"><div class="item-price">8,90 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('schokobecher')"><div class="item-left"><div class="item-name">Schokoladenbecher</div><div class="item-desc">3 Kugeln Eis, warme Schokosoße, Sahne, Schokosplitter</div></div><div class="item-right"><div class="item-price">8,90 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('spaghetti')"><div class="item-left"><div class="item-name">Spaghetti-Eis</div><div class="item-desc">Vanilleeis durch Spaghettipresse, Erdbeersauce, Sahne, weiße Schokolade</div></div><div class="item-right"><div class="item-price">9,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('kindereis')"><div class="item-left"><div class="item-name">Kinder-Eis</div><div class="item-desc">2 Kugeln Eis nach Wahl, Sahne, Waffel</div></div><div class="item-right"><div class="item-price">5,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('premiumbecher')"><div class="item-left"><div class="item-name">Premium Becher</div><div class="item-desc">4 Kugeln nach Wahl, Früchte der Saison, Sahne, Waffel</div></div><div class="item-right"><div class="item-price">11,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+  </div>
+
+  <!-- TAB 2 -->
+  <div class="tab-panel" id="tab-kaffee">
+    <p class="menu-section-intro">Hochwertige Kaffeespezialitäten aus fein gerösteten Arabica-Bohnen. Auf Wunsch mit Hafermilch.</p>
+    <div class="menu-category-title">Espresso &amp; Kaffee</div>
+    <div class="menu-item" onclick="openModal('espresso')"><div class="item-left"><div class="item-name">Espresso</div><div class="item-desc">Kurz und kräftig · 25 ml</div></div><div class="item-right"><div class="item-price">2,20 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('doppio')"><div class="item-left"><div class="item-name">Doppio</div><div class="item-desc">Doppelter Espresso · 50 ml</div></div><div class="item-right"><div class="item-price">3,20 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('americano')"><div class="item-left"><div class="item-name">Americano</div><div class="item-desc">Espresso verlängert mit heißem Wasser · 200 ml</div></div><div class="item-right"><div class="item-price">2,80 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('cappuccino')"><div class="item-left"><div class="item-name">Cappuccino</div><div class="item-desc">Espresso mit aufgeschäumter Milch · 180 ml</div></div><div class="item-right"><div class="item-price">3,20 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('latte')"><div class="item-left"><div class="item-name">Latte Macchiato</div><div class="item-desc">Doppelter Espresso in heißer Milch · 350 ml</div></div><div class="item-right"><div class="item-price">3,80 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('flatwhite')"><div class="item-left"><div class="item-name">Flat White</div><div class="item-desc">Intensiver Espresso mit samtigem Milchschaum · 160 ml</div></div><div class="item-right"><div class="item-price">3,50 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-category-title">Kalt &amp; Eisgetränke</div>
+    <div class="menu-item" onclick="openModal('eiskaffee')"><div class="item-left"><div class="item-name">Eiskaffee</div><div class="item-desc">Starker Kaffee, 2 Kugeln Vanilleeis, Sahne, Waffel</div></div><div class="item-right"><div class="item-price">6,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('eisschokolade')"><div class="item-left"><div class="item-name">Eisschokolade</div><div class="item-desc">Kalte Schokolade, 2 Kugeln Schokoladeneis, Sahne</div></div><div class="item-right"><div class="item-price">6,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-category-title">Heißgetränke</div>
+    <div class="menu-item" onclick="openModal('heisseschoko')"><div class="item-left"><div class="item-name">Heiße Schokolade</div><div class="item-desc">Mit echter Kuvertüre, auf Wunsch mit Sahne</div></div><div class="item-right"><div class="item-price">3,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('tee')"><div class="item-left"><div class="item-name">Tee / Kräutertee</div><div class="item-desc">Verschiedene Sorten, täglich wechselnd</div></div><div class="item-right"><div class="item-price">2,50 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-category-title">Softdrinks &amp; Wasser</div>
+    <div class="menu-item" onclick="openModal('wasser')"><div class="item-left"><div class="item-name">Wasser (still / sprudelnd)</div><div class="item-desc">0,25 l / 0,5 l</div></div><div class="item-right"><div class="item-price">1,80 / 2,80 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('softdrinks')"><div class="item-left"><div class="item-name">Softdrinks</div><div class="item-desc">Cola, Fanta, Sprite, Apfelsaft · 0,3 l</div></div><div class="item-right"><div class="item-price">2,80 €</div><button class="item-info-btn">Details</button></div></div>
+  </div>
+
+  <!-- TAB 3 -->
+  <div class="tab-panel" id="tab-bistro">
+    <p class="menu-section-intro">Hausgemachte Kuchen, frische Waffeln und kleine Bistrogerichte — der perfekte Begleiter zum Kaffee.</p>
+    <div class="menu-category-title">Kuchen &amp; Waffeln</div>
+    <div class="menu-item" onclick="openModal('waffel')"><div class="item-left"><div class="item-name">Waffel mit Eis &amp; Sahne</div><div class="item-desc">Frisch gebackene Herzwaffel, 2 Kugeln Eis, Sahne</div></div><div class="item-right"><div class="item-price">7,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('kuchentag')"><div class="item-left"><div class="item-name">Kuchen des Tages</div><div class="item-desc">Hausgemacht, täglich wechselnd — bitte erfragen</div></div><div class="item-right"><div class="item-price">ab 3,50 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('kuchenmiteis')"><div class="item-left"><div class="item-name">Kuchen mit Eis</div><div class="item-desc">Tageskuchen mit 1 Kugel Eis nach Wahl</div></div><div class="item-right"><div class="item-price">ab 5,80 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-category-title">Snacks &amp; Kleinigkeiten</div>
+    <div class="menu-item" onclick="openModal('sandwich')"><div class="item-left"><div class="item-name">Sandwich / Baguette</div><div class="item-desc">Täglich frisch belegt, wechselnde Belegungen</div></div><div class="item-right"><div class="item-price">ab 4,50 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('fruehstueck')"><div class="item-left"><div class="item-name">Frühstück</div><div class="item-desc">Auf Voranmeldung — bitte telefonisch anfragen</div></div><div class="item-right"><div class="item-price">auf Anfrage</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-category-title">Wein &amp; Aperitifs</div>
+    <div class="menu-item" onclick="openModal('wein')"><div class="item-left"><div class="item-name">Wein (Weiß / Rosé / Rot)</div><div class="item-desc">0,2 l Glas, saisonale Auswahl</div></div><div class="item-right"><div class="item-price">ab 4,50 €</div><button class="item-info-btn">Details</button></div></div>
+    <div class="menu-item" onclick="openModal('aperol')"><div class="item-left"><div class="item-name">Aperol Spritz</div><div class="item-desc">Aperol, Prosecco, Sodawasser, Orange</div></div><div class="item-right"><div class="item-price">6,50 €</div><button class="item-info-btn">Zutaten</button></div></div>
+    <div class="menu-item" onclick="openModal('prosecco')"><div class="item-left"><div class="item-name">Prosecco</div><div class="item-desc">0,1 l, trocken</div></div><div class="item-right"><div class="item-price">3,80 €</div><button class="item-info-btn">Details</button></div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galerie">
+  <div class="gallery">
+    <div class="gallery-item tall"><img src="beispiel_eistheke.jpg" alt="Eistheke"><div class="gallery-caption">Die Eistheke</div></div>
+    <div class="gallery-item"><img src="dreieis.jpg" alt="Eisbecher"><div class="gallery-caption">Eisbecher</div></div>
+    <div class="gallery-item"><img src="eisherz.jpg" alt="Terrasse"><div class="gallery-caption">Sonnenterrasse</div></div>
+    <div class="gallery-item wide"><img src="beispiel_alkoholische_getränke.png" alt="Spezialitäten"><div class="gallery-caption">Unsere Spezialitäten</div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="bewertungen">
+  <div class="reviews-header">
+    <p class="section-label">Was Gäste sagen</p>
+    <h2>Stimmen unserer <em>Gäste</em></h2>
+    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+  </div>
+  <div class="reviews-grid-wrap">
+    <div class="review-card"><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="review-text">„Das leckerste Eis in Bad Lippspringe. Als wir dort waren, war die Auswahl wunderbar — höfliches Personal und wunderbare Atmosphäre."</p><p class="review-author">— Timon Professor · Google</p></div>
+    <div class="review-card"><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="review-text">„Durch die Reha haben wir das Vero Gusto entdeckt. Ein nettes kleines Eiscafé, sehr nettes Personal und das Eis ist wirklich gut."</p><p class="review-author">— Claudia D. · Google</p></div>
+    <div class="review-card"><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="review-text">„Super freundliches Personal, auch zu den Kindern. Während unserer Reha sind wir regelmäßig dort hingegangen."</p><p class="review-author">— Roady · Google</p></div>
+  </div>
+  <div class="rating-badge">
+    <div><div class="rating-big">4,2</div><div class="rating-label">Google</div></div>
+    <div class="rating-divider"></div>
+    <div><div class="rating-big">317</div><div class="rating-label">Rezensionen</div></div>
+    <div class="rating-divider"></div>
+    <div><div class="rating-big">5,0</div><div class="rating-label">Facebook</div></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="kontakt">
+  <div class="location-text">
+    <p class="section-label">Besuchen Sie uns</p>
+    <h2>Finden Sie <em>uns</em></h2>
+    <p>Direkt in der Fußgängerzone am Rathausplatz — der perfekte Stopp bei Ihrem Kurspaziergang.</p>
+    <div class="info-rows">
+      <div class="info-row"><div class="info-icon-circle">A</div><div class="info-content"><div class="info-title">Adresse</div><div class="info-value">Arminiusstraße 16, 33175 Bad Lippspringe</div></div></div>
+      <div class="info-row"><div class="info-icon-circle">T</div><div class="info-content"><div class="info-title">Telefon</div><div class="info-value"><a href="tel:+4915151557927" style="color:inherit;text-decoration:none">+49 1515 1557927</a></div></div></div>
+      <div class="info-row"><div class="info-icon-circle">E</div><div class="info-content"><div class="info-title">E-Mail</div><div class="info-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6b2b7b8bff8b7a4b7a596bfb5bab9a3b2f8b5b9bb">[email&#160;protected]</a></div></div></div>
+      <div class="info-row"><div class="info-icon-circle">Z</div><div class="info-content"><div class="info-title">Öffnungszeiten</div><div class="info-value">Mo – Fr 08:30 – 19:00 Uhr<br>Sa – So 10:00 – 19:00 Uhr<br><small style="opacity:0.6">Im Sommer ggf. länger</small></div></div></div>
+    </div>
+  </div>
+  <div class="location-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2469.0!2d8.8330!3d51.7850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ba47e0a7c1e5c3%3A0x1!2sArminiusstra%C3%9Fe%2016%2C%2033175%20Bad%20Lippspringe!5e0!3m2!1sde!2sde!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Karte Vero Gusto"></iframe>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Heute noch <em>vorbeikommen</em></h2>
+  <p>Täglich frisches, hausgemachtes Eis wartet auf Sie.<br>Wir freuen uns auf Ihren Besuch!</p>
+  <a href="tel:+4915151557927" class="btn-primary">Jetzt anrufen</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Vero <span>Gusto</span></div>
+  <p class="footer-tagline">Original italienisches Eis aus eigener Herstellung. Ihr Lieblingsort in Bad Lippspringe.</p>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Kontakt</h4><p>Arminiusstraße 16<br>33175 Bad Lippspringe<br><br>+49 1515 1557927<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d090c0304430c1f0c1e2d040e01021809430e0200">[email&#160;protected]</a></p></div>
+    <div class="footer-col"><h4>Öffnungszeiten</h4><p>Mo – Fr &nbsp; 08:30 – 19:00<br>Sa – So &nbsp; 10:00 – 19:00<br><br><span style="color:rgba(250,246,239,0.3);font-size:0.78rem">Im Sommer ggf. länger</span></p></div>
+  </div>
+  <div class="footer-legal">
+    <p>© 2025 Vero Gusto · Eis. Kaffee. Bistro · Bad Lippspringe</p>
+    <div class="footer-legal-links">
+      <button onclick="openLegal('impressum')">Impressum</button>
+      <button onclick="openLegal('datenschutz')">Datenschutz</button>
+    </div>
+  </div>
+</footer>
+
+<!-- INGREDIENT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-handle"></div>
+    <div class="modal-name" id="modalName"></div>
+    <div class="modal-price" id="modalPrice"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <p class="modal-label">Zutaten</p>
+    <ul class="ingredient-list" id="modalIngredients"></ul>
+    <p class="modal-label" style="margin-top:1.2rem">Allergene</p>
+    <div class="allergen-chips" id="modalAllergens"></div>
+    <button class="modal-close-btn" onclick="closeModalDirect()">Schliessen</button>
+  </div>
+</div>
+
+<!-- LEGAL MODAL -->
+<div class="legal-modal-overlay" id="legalOverlay" onclick="closeLegal(event)">
+  <div class="legal-modal" id="legalBox">
+    <div class="legal-modal-head">
+      <h3 id="legalTitle"></h3>
+      <button class="legal-close" onclick="closeLegalDirect()">&#x2715;</button>
+    </div>
+    <div class="legal-modal-body" id="legalBody"></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// TABS
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+// MENU DATA
+const D={
+  vanille:{name:'Vanille',price:'2,50 € / Kugel',desc:'Cremiges Vanilleeis nach original italienischer Rezeptur mit natürlicher Bourbon-Vanille.',ing:['Vollmilch','Sahne','Zucker','Magermilchpulver','Eigelb','Bourbon-Vanille','Johannisbrotkernmehl (Stabilisator)'],all:['Milch','Ei']},
+  schokolade:{name:'Schokolade',price:'2,50 € / Kugel',desc:'Intensives Schokoladeneis aus dunkler Kuvertüre mit mindestens 60 % Kakaoanteil.',ing:['Vollmilch','Sahne','Zucker','Dunkle Kuvertüre (Kakao, Kakaobutter, Zucker)','Kakaopulver','Eigelb'],all:['Milch','Ei','Soja (Spuren)']},
+  stracciatella:{name:'Stracciatella',price:'2,50 € / Kugel',desc:'Sahniges Milcheis mit feinen Schokoladensplittern.',ing:['Vollmilch','Sahne','Zucker','Magermilchpulver','Eigelb','Zartbitterschokolade','Vanillin'],all:['Milch','Ei','Soja (Spuren)']},
+  pistazie:{name:'Pistazie',price:'2,50 € / Kugel',desc:'Fein gemahlene Pistazien aus sizilianischem Anbau geben diesem Eis seinen unverwechselbaren Charakter.',ing:['Vollmilch','Sahne','Zucker','Pistazienpaste 15 %','Magermilchpulver','Eigelb'],all:['Milch','Ei','Nüsse (Pistazien)']},
+  haselnuss:{name:'Haselnuss',price:'2,50 € / Kugel',desc:'Nussig-cremig mit gerösteten Haselnüssen aus dem Piemont.',ing:['Vollmilch','Sahne','Zucker','Haselnusspaste 14 %','Magermilchpulver','Eigelb'],all:['Milch','Ei','Nüsse (Haselnuss)']},
+  tiramisu:{name:'Tiramisu',price:'2,50 € / Kugel',desc:'Mascarpone, Espresso und ein Hauch Amaretto — der klassische Nachtisch als cremiges Eis.',ing:['Vollmilch','Sahne','Mascarpone','Zucker','Espresso','Eigelb','Amaretto (Spuren)','Kakaopulver'],all:['Milch','Ei','Alkohol (Spuren)','Gluten (Spuren)']},
+  erdbeere:{name:'Erdbeere',price:'2,50 € / Kugel',desc:'Fruchtsorbet aus frischen, reifen Erdbeeren. Ohne Milch und Ei.',ing:['Erdbeerpüree 55 %','Wasser','Zucker','Zitronensaft','Glukosesirup'],all:['Keine der 14 Hauptallergene']},
+  zitrone:{name:'Zitrone',price:'2,50 € / Kugel',desc:'Erfrischendes Zitronensorbet aus frisch gepressten Zitronen.',ing:['Zitronensaft 40 %','Wasser','Zucker','Zitronenschale','Glukosesirup'],all:['Keine der 14 Hauptallergene']},
+  himbeere:{name:'Himbeere',price:'2,50 € / Kugel',desc:'Intensives Himbeersorbet aus reifen Früchten ohne künstliche Aromen.',ing:['Himbeerpüree 55 %','Wasser','Zucker','Zitronensaft','Glukosesirup'],all:['Keine der 14 Hauptallergene']},
+  erdbeerbecher:{name:'Erdbeerbecher',price:'8,90 €',desc:'Drei Kugeln Eis nach Wahl mit frischen Erdbeeren, Schlagsahne und Herzwaffel.',ing:['Eis nach Wahl','Frische Erdbeeren','Schlagsahne','Erdbeersauce','Herzwaffel'],all:['Milch','Ei','Gluten']},
+  schokobecher:{name:'Schokoladenbecher',price:'8,90 €',desc:'Drei Kugeln Eis, warme Schokosoße, Sahne, Schokosplitter und Herzwaffel.',ing:['Eis nach Wahl','Dunkle Schokosoße','Schlagsahne','Schokoladensplitter','Herzwaffel'],all:['Milch','Ei','Gluten','Soja (Spuren)']},
+  spaghetti:{name:'Spaghetti-Eis',price:'9,50 €',desc:'Vanilleeis durch die Spaghettipresse, Erdbeersauce und geriebene weiße Schokolade.',ing:['Vanilleeis','Erdbeersauce','Schlagsahne','Weiße Schokolade (gerieben)'],all:['Milch','Ei','Soja (Spuren)']},
+  kindereis:{name:'Kinder-Eis',price:'5,50 €',desc:'Zwei Kugeln Eis nach Wahl, Schlagsahne und Herzwaffel.',ing:['Eis nach Wahl','Schlagsahne','Herzwaffel'],all:['Milch','Ei','Gluten']},
+  premiumbecher:{name:'Premium Becher',price:'11,50 €',desc:'Vier Kugeln Eis nach Wahl, frische Früchte der Saison, Sahne und Herzwaffel.',ing:['4 Kugeln Eis nach Wahl','Saisonale Früchte','Schlagsahne','Fruchtsoße','Herzwaffel'],all:['Milch','Ei','Gluten']},
+  espresso:{name:'Espresso',price:'2,20 €',desc:'Kräftiger Espresso aus sortenreinen Arabica-Bohnen. 25 ml.',ing:['Arabica-Kaffeebohnen (gemahlen)','Wasser'],all:['Keine der 14 Hauptallergene']},
+  doppio:{name:'Doppio',price:'3,20 €',desc:'Doppelter Espresso, 50 ml.',ing:['Arabica-Kaffeebohnen (gemahlen)','Wasser'],all:['Keine der 14 Hauptallergene']},
+  americano:{name:'Americano',price:'2,80 €',desc:'Espresso mit heißem Wasser verlängert, 200 ml.',ing:['Arabica-Kaffeebohnen (gemahlen)','Heißes Wasser'],all:['Keine der 14 Hauptallergene']},
+  cappuccino:{name:'Cappuccino',price:'3,20 €',desc:'Espresso mit cremig aufgeschäumter Vollmilch, 180 ml.',ing:['Espresso','Vollmilch','Milchschaum'],all:['Milch']},
+  latte:{name:'Latte Macchiato',price:'3,80 €',desc:'Milchschaum, Vollmilch und Doppelespresso in Schichten, 350 ml.',ing:['Doppelter Espresso','Vollmilch','Milchschaum'],all:['Milch']},
+  flatwhite:{name:'Flat White',price:'3,50 €',desc:'Intensiver Doppelespresso mit samtig aufgedampfter Milch, 160 ml.',ing:['Doppelter Espresso','Vollmilch (Mikroschaumtextur)'],all:['Milch']},
+  eiskaffee:{name:'Eiskaffee',price:'6,50 €',desc:'Gekühlter Kaffee, zwei Kugeln Vanilleeis, Sahne und Herzwaffel.',ing:['Starker Kaffee (abgekühlt)','Vanilleeis (2 Kugeln)','Schlagsahne','Herzwaffel'],all:['Milch','Ei','Gluten']},
+  eisschokolade:{name:'Eisschokolade',price:'6,50 €',desc:'Gekühlte Trinkschokolade mit zwei Kugeln Schokoladeneis und Sahne.',ing:['Trinkschokolade (kalt)','Schokoladeneis (2 Kugeln)','Schlagsahne'],all:['Milch','Ei','Soja (Spuren)']},
+  heisseschoko:{name:'Heiße Schokolade',price:'3,50 €',desc:'Heiße Trinkschokolade aus echter Kuvertüre, auf Wunsch mit Sahne.',ing:['Vollmilch','Dunkle Kuvertüre','Zucker','optional: Schlagsahne'],all:['Milch','Soja (Spuren)']},
+  tee:{name:'Tee / Kräutertee',price:'2,50 €',desc:'Täglich wechselnde Auswahl an Schwarz-, Kräuter- und Früchtetees.',ing:['Heißes Wasser','Teebeutel (Sorte variiert)'],all:['Keine der 14 Hauptallergene']},
+  wasser:{name:'Wasser',price:'1,80 € (0,25 l) / 2,80 € (0,5 l)',desc:'Stilles oder sprudelndes Mineralwasser.',ing:['Mineralwasser'],all:['Keine der 14 Hauptallergene']},
+  softdrinks:{name:'Softdrinks',price:'2,80 €',desc:'Cola, Fanta, Sprite, Apfelsaft. Bitte aktuell erhältliche Sorten erfragen.',ing:['Je nach Sorte'],all:['Je nach Sorte']},
+  waffel:{name:'Waffel mit Eis & Sahne',price:'7,50 €',desc:'Frisch gebackene Herzwaffel, zwei Kugeln Eis nach Wahl und Schlagsahne.',ing:['Weizenmehl','Eier','Butter','Zucker','Vollmilch','Backpulver','Eis nach Wahl','Schlagsahne'],all:['Gluten','Ei','Milch']},
+  kuchentag:{name:'Kuchen des Tages',price:'Ab 3,50 €',desc:'Täglich frisch hausgemacht. Sorten variieren — bitte an der Theke erfragen.',ing:['Je nach Tageskuchen'],all:['Je nach Sorte — bitte erfragen']},
+  kuchenmiteis:{name:'Kuchen mit Eis',price:'Ab 5,80 €',desc:'Tageskuchen mit einer Kugel Eis nach Wahl.',ing:['Tageskuchen','Eis nach Wahl (1 Kugel)'],all:['Je nach Tageskuchen — bitte erfragen']},
+  sandwich:{name:'Sandwich / Baguette',price:'Ab 4,50 €',desc:'Täglich frisch belegte Sandwiches und Baguettes. Belegung wechselt täglich.',ing:['Brot / Baguette','Belegung variiert täglich'],all:['Gluten','weitere je nach Belag']},
+  fruehstueck:{name:'Frühstück',price:'Auf Anfrage',desc:'Frühstück auf Voranmeldung. Bitte telefonisch anfragen: +49 1515 1557927.',ing:['Auf Anfrage'],all:['Auf Anfrage']},
+  wein:{name:'Wein',price:'Ab 4,50 € (0,2 l)',desc:'Saisonale Weinauswahl in Weiß, Rosé und Rot. Aktuelle Sorten bitte erfragen.',ing:['Trauben','Schwefeldioxid'],all:['Sulfite']},
+  aperol:{name:'Aperol Spritz',price:'6,50 €',desc:'Aperol, Prosecco und Sodawasser mit einer Orangenscheibe.',ing:['Aperol','Prosecco','Sodawasser','Orange (Scheibe)','Eis'],all:['Sulfite','Alkohol']},
+  prosecco:{name:'Prosecco',price:'3,80 € (0,1 l)',desc:'Trockener Prosecco, frisch und prickelnd.',ing:['Glera-Trauben','Schwefeldioxid'],all:['Sulfite','Alkohol']}
+};
+
+function openModal(id){
+  const d=D[id]; if(!d) return;
+  document.getElementById('modalName').textContent=d.name;
+  document.getElementById('modalPrice').textContent=d.price;
+  document.getElementById('modalDesc').textContent=d.desc;
+  document.getElementById('modalIngredients').innerHTML=d.ing.map(i=>`<li>${i}</li>`).join('');
+  document.getElementById('modalAllergens').innerHTML=d.all.map(a=>`<span class="chip">${a}</span>`).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){if(e.target===document.getElementById('modalOverlay'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+
+// LEGAL
+const L={
+  impressum:{title:'Impressum',body:`<h4>Angaben gemäß § 5 TMG</h4><p>Vero Gusto – Eis. Kaffee. Bistro<br>Arminiusstraße 16<br>33175 Bad Lippspringe<br>Deutschland</p><h4>Kontakt</h4><p>Telefon: +49 1515 1557927<br>E-Mail: dani.aras@icloud.com</p><h4>Verantwortlich für den Inhalt</h4><p>Inhaber: [Name des Inhabers]<br>Anschrift wie oben.</p><h4>Haftungsausschluss</h4><p>Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität können wir keine Gewähr übernehmen.</p><h4>Urheberrecht</h4><p>Die durch den Seitenbetreiber erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht.</p><h4>Streitschlichtung</h4><p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>`},
+  datenschutz:{title:'Datenschutzerklärung',body:`<h4>1. Verantwortliche Stelle</h4><p>Vero Gusto – Eis. Kaffee. Bistro<br>Arminiusstraße 16, 33175 Bad Lippspringe<br>E-Mail: dani.aras@icloud.com</p><h4>2. Datenerfassung</h4><p>Diese Website erhebt keine personenbezogenen Daten über Formulare oder Tracking. Es werden keine Cookies gesetzt.</p><h4>3. Google Maps</h4><p>Diese Website nutzt Google Maps (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Bei Nutzung können Daten an Google-Server übertragen werden. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p><h4>4. Hosting</h4><p>Server-Logdateien werden automatisch gespeichert. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p><h4>5. Ihre Rechte</h4><p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung oder Löschung Ihrer gespeicherten Daten. Kontakt: dani.aras@icloud.com</p><h4>6. Änderungen</h4><p>Wir behalten uns vor, diese Erklärung anzupassen, um sie aktuellen rechtlichen Anforderungen zu entsprechen.</p>`}
+};
+function openLegal(t){const d=L[t];document.getElementById('legalTitle').textContent=d.title;document.getElementById('legalBody').innerHTML=d.body;document.getElementById('legalOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeLegal(e){if(e.target===document.getElementById('legalOverlay'))closeLegalDirect();}
+function closeLegalDirect(){document.getElementById('legalOverlay').classList.remove('open');document.body.style.overflow='';}
+</script>
+</body>
+</html>
